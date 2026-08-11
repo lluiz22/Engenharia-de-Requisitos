@@ -1,164 +1,178 @@
-1. Problema
-Uma startup enfrenta dificuldades na organização e acompanhamento de seus projetos, principalmente em relação à comunicação interna, controle de tarefas, identificação de atrasos e visibilidade gerencial.
+# Sistema de Gestão Inteligente de Projetos com LLM
 
-Atualmente, as informações estão distribuídas entre diferentes ferramentas, dificultando a consolidação dos dados e aumentando a necessidade de atualizações manuais por parte dos funcionários e gestores.
+## 1. Visão Geral
 
-2. Solução Proposta
-A solução consiste no desenvolvimento de um sistema de gestão ágil integrado a um agente de Inteligência Artificial (LLM).
+O **Obsidian** funciona como o "cérebro" de conhecimento do sistema, armazenando e organizando informações relevantes dos projetos para que um **LLM (Large Language Model)** possa consultá-las quando necessário.
 
-O agente será responsável por coletar, interpretar e consolidar informações provenientes das ferramentas utilizadas pela empresa, como:
+O sistema permite que os funcionários enviem informações por **texto ou áudio**, principalmente durante os **Dailys**. A LLM poderá interpretar essas informações, consultar os dados existentes nas ferramentas integradas e gerar atualizações para a equipe e para os gestores.
 
-GitHub;
+---
 
-Obsidian;
+# 2. Requisitos de Negócio
 
-Trello;
+## RN01 — Melhorar a comunicação interna
 
-Google Drive;
+### Descrição
 
-WhatsApp.
-
-A VPS será responsável por hospedar e intermediar as integrações entre os serviços, utilizando APIs, webhooks e/ou MCPs.
-
-O Obsidian funcionará como o "cérebro" de conhecimento, armazenando e organizando informações relevantes dos projetos para que a LLM possa consultá-las quando necessário.
-
-O sistema permitirá que os funcionários enviem informações por texto ou áudio, principalmente durante as dailies. A LLM poderá interpretar essas informações, consultar os dados existentes nas ferramentas integradas e gerar atualizações para a equipe e para os gestores.
-
-3. Requisitos de Negócio
-RN01 — Melhorar a comunicação interna
 A solução deve facilitar a comunicação entre os membros da equipe, reduzindo a necessidade de atualizações manuais e repetitivas.
 
-Objetivo
+### Objetivo
+
 Centralizar e automatizar o compartilhamento de informações relacionadas ao andamento dos projetos.
 
-RN02 — Reduzir atrasos nos projetos
+---
+
+## RN02 — Reduzir atrasos nos projetos
+
+### Descrição
+
 A solução deve permitir identificar antecipadamente:
 
-Tarefas atrasadas;
+* Tarefas atrasadas;
+* Impedimentos;
+* Riscos;
+* Atividades sem atualização;
+* Possíveis problemas que possam comprometer os prazos.
 
-Impedimentos;
+### Objetivo
 
-Riscos;
-
-Atividades sem atualização;
-
-Possíveis problemas que possam comprometer os prazos.
-
-Objetivo
 Permitir que gestores e equipes atuem de forma preventiva antes que os problemas afetem o cronograma dos projetos.
 
-RN03 — Aumentar a visibilidade da gestão
+---
+
+## RN03 — Aumentar a visibilidade da gestão
+
+### Descrição
+
 Os gestores devem possuir uma visão consolidada do andamento dos projetos e das atividades da equipe.
 
-Objetivo
+### Objetivo
+
 Facilitar a tomada de decisões por meio de informações centralizadas e atualizadas.
 
-RN04 — Otimizar processos internos
+---
+
+## RN04 — Automatizar processos internos
+
+### Descrição
+
 A solução deve automatizar atividades relacionadas ao acompanhamento de:
 
-Dailies;
+* Dailys;
+* Weeklies;
+* Sprints;
+* Tarefas;
+* Impedimentos;
+* Progresso dos projetos.
 
-Weeklies;
+### Objetivo
 
-Sprints;
-
-Tarefas;
-
-Impedimentos;
-
-Progresso dos projetos.
-
-Objetivo
 Reduzir o trabalho manual e tornar o acompanhamento dos projetos mais eficiente.
 
-RN05 — Centralizar informações
+---
+
+## RN05 — Centralizar informações
+
+### Descrição
+
 A solução deve utilizar as informações existentes nas ferramentas utilizadas pela empresa para gerar uma visão integrada dos projetos.
 
-Objetivo
+### Objetivo
+
 Evitar que informações importantes fiquem isoladas em diferentes sistemas e facilitar o acesso ao conhecimento da organização.
 
-4. Stack Tecnológica
-Tecnologia	Função
-LLM / API de IA	Interpretação de mensagens, análise das informações e geração de respostas
-VPS	Hospedagem do agente e centralização das integrações
-GitHub	Repositórios de código e informações relacionadas ao desenvolvimento
-Obsidian	Base de conhecimento e "cérebro" do agente
-Trello	Organização e acompanhamento dos projetos e tarefas
-Google Drive	Armazenamento de arquivos e documentos
-WhatsApp	Interface de comunicação com os funcionários
-APIs / MCPs	Integração entre o agente e as ferramentas
-Webhooks	Comunicação e acionamento automático entre os sistemas
-Observação: informações sensíveis, como senhas e credenciais de acesso, devem ser armazenadas de forma segura. O Google Drive não deve ser utilizado como armazenamento direto de senhas em texto puro.
+---
 
-5. Arquitetura Proposta
-                         ┌─────────────────┐
-                         │   Funcionário   │
-                         └────────┬────────┘
-                                  │
-                           Texto ou Áudio
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │    WhatsApp     │
-                         └────────┬────────┘
-                                  │
-                               Webhook
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │      VPS        │
-                         │                 │
-                         │  Agente / LLM   │
-                         └────────┬────────┘
-                                  │
-                   ┌──────────────┼──────────────┐
-                   │              │              │
-                   ▼              ▼              ▼
-              ┌─────────┐   ┌──────────┐   ┌─────────┐
-              │ GitHub  │   │ Obsidian │   │ Trello  │
-              └─────────┘   └──────────┘   └─────────┘
-                   │              │              │
-                   └──────────────┼──────────────┘
-                                  │
-                                  ▼
-                            ┌───────────┐
-                            │ Google    │
-                            │ Drive     │
-                            └─────┬─────┘
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │      LLM        │
-                         │                 │
-                         │ Analisa dados   │
-                         │ Identifica      │
-                         │ riscos e gera   │
-                         │ atualizações    │
-                         └────────┬────────┘
-                                  │
-                              Webhook
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │ Grupo da        │
-                         │ Empresa         │
-                         │ (Daily)         │
-                         └─────────────────┘
-6. Fluxo de Funcionamento
-6.1 Entrada da informação
-O funcionário envia uma mensagem para o sistema através do WhatsApp.
+# 3. Stack Tecnológica
+
+| Tecnologia          | Função                                                                     |
+| ------------------- | -------------------------------------------------------------------------- |
+| **LLM / API de IA** | Interpretação de mensagens, análise das informações e geração de respostas |
+| **VPS**             | Hospedagem do agente e centralização das integrações                       |
+| **GitHub**          | Repositórios de código e informações relacionadas ao desenvolvimento       |
+| **Obsidian**        | Base de conhecimento e "cérebro" do agente                                 |
+| **Trello**          | Organização e acompanhamento dos projetos e tarefas                        |
+| **Google Drive**    | Armazenamento de arquivos e documentos                                     |
+| **WhatsApp**        | Interface de comunicação com os funcionários                               |
+| **APIs / MCPs**     | Integração entre o agente e as ferramentas                                 |
+| **Webhooks**        | Comunicação e acionamento automático entre os sistemas                     |
+
+> **Observação:** informações sensíveis, como senhas e credenciais de acesso, devem ser armazenadas de forma segura. O Google Drive não deve ser utilizado como armazenamento direto de senhas em texto puro.
+
+---
+
+# 4. Arquitetura Proposta
+
+```text
+┌─────────────────┐
+│   Funcionário   │
+└────────┬────────┘
+         │
+    Texto ou Áudio
+         │
+         ▼
+┌─────────────────┐
+│    WhatsApp     │
+└────────┬────────┘
+         │
+      Webhook
+         │
+         ▼
+┌─────────────────┐
+│       VPS       │
+│                 │
+│   Agente / LLM  │
+└────────┬────────┘
+         │
+    ┌────┼────┬──────────────┐
+    │    │    │              │
+    ▼    ▼    ▼              ▼
+┌──────┐ ┌────────┐ ┌───────┐ ┌────────────┐
+│GitHub│ │Obsidian│ │Trello │ │Google Drive│
+└──────┘ └────────┘ └───────┘ └────────────┘
+         │
+         ▼
+┌─────────────────┐
+│       LLM       │
+│                 │
+│ Análise de dados│
+│ Identificação   │
+│ de riscos       │
+│ Geração de      │
+│ atualizações    │
+└────────┬────────┘
+         │
+      Webhook
+         │
+         ▼
+┌─────────────────┐
+│ Grupo da Empresa│
+│   (Diariamente) │
+└─────────────────┘
+```
+
+---
+
+# 5. Fluxo de Funcionamento
+
+## 5.1 Entrada da informação
+
+O funcionário envia uma mensagem para o sistema através do **WhatsApp**.
 
 A mensagem pode ser:
 
-Texto;
+* Texto;
+* Áudio.
 
-Áudio.
+---
 
-6.2 Processamento
+## 5.2 Processamento
+
 Caso a mensagem seja um áudio, o sistema realiza a transcrição do conteúdo.
 
-Após a transcrição, a informação é encaminhada para o agente de IA.
+Após a transcrição, a informação é encaminhada ao agente de IA.
 
+```text
 Áudio
   ↓
 Transcrição
@@ -166,288 +180,309 @@ Transcrição
 Texto
   ↓
 LLM
-6.3 Consulta às fontes de informação
-A LLM recebe a informação enviada pelo funcionário e consulta as fontes disponíveis através da VPS.
+```
 
-                ┌─────────────┐
-                │     LLM     │
-                └──────┬──────┘
-                       │
-                 Consulta dados
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-     GitHub         Obsidian        Trello
-        │              │              │
-        └──────────────┼──────────────┘
-                       │
-                    Google Drive
-Essas consultas podem ser realizadas utilizando APIs oficiais, APIs não oficiais quando apropriado, ou MCPs, dependendo da disponibilidade e das necessidades de cada integração.
+---
 
-7. Papel do Obsidian
-O Obsidian será utilizado como o "cérebro" do sistema.
+## 5.3 Consulta às fontes de informação
 
-Ele terá a função de concentrar o conhecimento relacionado aos projetos, permitindo que a LLM consulte informações como:
+O LLM recebe a informação enviada pelo funcionário e consulta as fontes disponíveis através da VPS.
 
-Contexto dos projetos;
+```text
+              ┌─────────────┐
+              │     LLM     │
+              └──────┬──────┘
+                     │
+               Consulta dados
+                     │
+        ┌────────────┼────────────┐
+        ▼            ▼            ▼
+     GitHub       Obsidian      Trello
+        │            │            │
+        └────────────┼────────────┘
+                     │
+                     ▼
+                Google Drive
+```
 
-Requisitos;
+Essas consultas podem ser realizadas utilizando:
 
-Decisões tomadas;
+* APIs oficiais;
+* APIs não oficiais, quando específicas;
+* MCPs (Model Context Protocol), dependendo da disponibilidade e das necessidades de cada integração.
 
-Documentação;
+---
 
-Regras de negócio;
+# 6. Papel do Obsidian
 
-Histórico de atividades;
+O **Obsidian** será utilizado como o **"cérebro" do sistema**.
 
-Informações importantes da equipe;
+Ele terá a função de concentrar o conhecimento relacionado aos projetos, permitindo que um LLM consulte informações como:
 
-Registros de reuniões;
+* Contexto dos projetos;
+* Requisitos;
+* Decisões tomadas;
+* Documentação;
+* Regras de negócio;
+* Histórico de atividades;
+* Informações importantes da equipe;
+* Registros de atividades;
+* Informações relacionadas aos Sprints.
 
-Informações relacionadas às sprints.
+A ideia é que o LLM não dependa apenas das informações apresentadas na mensagem recebida, mas também possa consultar o conhecimento previamente armazenado.
 
-A ideia é que a LLM não dependa apenas das informações presentes na mensagem recebida, mas também possa consultar o conhecimento previamente armazenado.
+---
 
-8. Funcionamento da Daily
-Um possível fluxo para a Daily seria:
+# 7. Funcionamento do Daily
 
+Um fluxo possível para o Daily seria:
+
+```text
 Funcionário envia áudio/texto
             ↓
-       WhatsApp
+         WhatsApp
             ↓
-          Webhook
+         Webhook
             ↓
            VPS
             ↓
-     Transcrição do áudio
+  Transcrição de áudio
             ↓
            LLM
             ↓
-    Consulta das informações
+Consulta das informações
             ↓
- GitHub / Obsidian / Trello / Drive
+┌───────────┼────────────┐
+▼           ▼            ▼
+GitHub   Obsidian      Trello
+            │
+            ▼
+       Google Drive
             ↓
       Análise pela LLM
             ↓
- Identificação de progresso,
- atrasos, impedimentos e riscos
+Identificação de progresso,
+atrasos, impedimentos e riscos
             ↓
-      Geração do resumo
+    Geração do resumo
             ↓
-          Webhook
+         Webhook
             ↓
-     Grupo da empresa
-9. Exemplo de Funcionamento
+    Grupo da empresa
+```
+
+---
+
+# 8. Exemplo de Funcionamento
+
 Um desenvolvedor pode enviar pelo WhatsApp:
 
-"Ontem finalizei a API de autenticação, mas estou travado na integração com o banco porque estou esperando as credenciais."
+> "Ontem finalizei uma API de autenticação, mas estou trabalhando na integração com o banco porque estou esperando as credenciais."
 
 O sistema poderá:
 
-Receber o áudio ou texto;
+1. Receber o áudio ou texto;
+2. Transcrever o áudio, caso necessário;
+3. Identificar que a tarefa de autenticação foi concluída;
+4. Identificar o impedimento relacionado às credenciais;
+5. Consultar o Trello para verificar a tarefa correspondente;
+6. Consultar o Obsidian para obter o contexto do projeto;
+7. Registrar ou sugerir a atualização das informações;
+8. Identificar o impedimento;
+9. Gerar um resumo para o Daily;
+10. Enviar as informações para o grupo da empresa.
 
-Transcrever o áudio, caso necessário;
+### Exemplo de resultado
 
-Identificar que a tarefa de autenticação foi concluída;
-
-Identificar o impedimento relacionado às credenciais;
-
-Consultar o Trello para verificar a tarefa correspondente;
-
-Consultar o Obsidian para obter o contexto do projeto;
-
-Registrar ou sugerir a atualização das informações;
-
-Identificar o impedimento;
-
-Gerar um resumo para a Daily;
-
-Enviar a informação para o grupo da empresa.
-
-Exemplo de resultado:
-
-📋 Daily — Projeto X
+```text
+📋 DAILY — Projeto X
 
 👨‍💻 Desenvolvedor: João
 
 ✅ Concluído:
-- API de autenticação.
+API de autenticação.
 
 🚧 Impedimento:
-- Integração com o banco aguardando credenciais.
+Integração com o banco aguardando credenciais.
 
 ⚠️ Atenção:
-- A ausência das credenciais pode impactar o prazo da tarefa.
+A ausência das credenciais pode impactar o prazo da tarefa.
 
 📌 Próxima ação:
-- Disponibilizar as credenciais necessárias para continuidade da integração.
-10. Stakeholders
-10.1 Gestores
-Responsáveis por acompanhar o progresso dos projetos, identificar atrasos, analisar riscos e tomar decisões.
+Disponibilizar as credenciais para continuidade da integração.
+```
 
-Necessidades
-Visão consolidada dos projetos;
+---
 
-Identificação de atrasos;
+# 9. Stakeholders
 
-Identificação de riscos;
+## 9.1 Gestores
 
-Acompanhamento da equipe;
+Responsáveis por acompanhar o andamento dos projetos, identificar atrasos, analisar riscos e tomar decisões.
 
-Indicadores de progresso.
+### Necessidades
 
-10.2 Desenvolvedores
+* Visão consolidada dos projetos;
+* Identificação de atrasos;
+* Identificação de riscos;
+* Acompanhamento da equipe;
+* Relatórios de progresso.
+
+---
+
+## 9.2 Desenvolvedores
+
 Responsáveis pela execução das atividades e pelo registro de progresso, dificuldades e impedimentos.
 
-Necessidades
-Registrar atividades rapidamente;
+### Necessidades
 
-Comunicar impedimentos;
+* Registrar atividades rapidamente;
+* Comunicar impedimentos;
+* Atualizar tarefas;
+* Reduzir atividades manuais;
+* Interagir com o sistema por texto ou áudio.
 
-Atualizar tarefas;
+---
 
-Reduzir atividades manuais;
+## 9.3 Analistas de Negócio
 
-Interagir com o sistema por texto ou áudio.
-
-10.3 Analistas de Negócio
 Responsáveis por levantar, analisar e organizar as necessidades da empresa.
 
-Necessidades
-Organizar requisitos;
+### Necessidades
 
-Acompanhar necessidades dos projetos;
+* Organizar requisitos;
+* Acompanhar necessidades dos projetos;
+* Garantir o alinhamento entre negócio e equipe técnica.
 
-Garantir alinhamento entre negócio e equipe técnica.
+---
 
-10.4 Engenheiros de Requisitos
+## 9.4 Engenheiros de Requisitos
+
 Responsáveis pela documentação, análise e organização dos requisitos.
 
-Necessidades
-Centralizar requisitos;
+### Necessidades
 
-Manter documentação atualizada;
+* Centralizar requisitos;
+* Manter documentação atualizada;
+* Relacionar requisitos às atividades dos projetos;
+* Facilitar o rastreamento das mudanças.
 
-Relacionar requisitos às atividades dos projetos;
+---
 
-Facilitar o rastreamento das mudanças.
+## 9.5 Usuários / Funcionários
 
-10.5 Usuários / Funcionários
 Interagem diretamente com o sistema, principalmente por meio de mensagens de texto ou áudio.
 
-Necessidades
-Facilidade de uso;
+### Necessidades
 
-Comunicação rápida;
+* Facilidade de uso;
+* Comunicação rápida;
+* Pouca necessidade de preenchimento manual;
+* Possibilidade de envio de informações por áudio.
 
-Pouca necessidade de preenchimento manual;
+---
 
-Possibilidade de enviar informações por áudio.
+## 9.6 Equipe de Infraestrutura
 
-10.6 Equipe de Infraestrutura
 Responsável pela manutenção da VPS, APIs, integrações e demais componentes técnicos.
 
-Necessidades
-Monitoramento dos serviços;
+### Necessidades
 
-Segurança;
+* Monitoramento dos serviços;
+* Segurança;
+* Disponibilidade;
+* Gerenciamento das integrações;
+* Controle de acessos;
+* Manutenção da infraestrutura.
 
-Disponibilidade;
+---
 
-Gerenciamento das integrações;
+## 9.7 LLM / Agente de IA
 
-Controle de acessos;
-
-Manutenção da infraestrutura.
-
-10.7 LLM / Agente de IA
 Componente responsável por interpretar informações, consultar as fontes de dados e gerar respostas e atualizações.
 
-Responsabilidades
-Interpretar mensagens;
+### Responsabilidades
 
-Processar transcrições;
+* Interpretar mensagens;
+* Processar transcrições;
+* Consultar informações;
+* Correlacionar dados de diferentes ferramentas;
+* Identificar atrasos e impedimentos;
+* Gerar resumos;
+* Auxiliar na comunicação da equipe;
+* Automatizar atividades relacionadas a Dailys, Weeklies e Sprints.
 
-Consultar informações;
+---
 
-Correlacionar dados de diferentes ferramentas;
+# 10. Visão Geral da Solução
 
-Identificar atrasos e impedimentos;
+A proposta de solução busca transformar diversas ferramentas isoladas em um **ecossistema integrado de gestão ágil**, no qual o LLM atua como uma camada inteligente entre os funcionários, gestores e as fontes de informação da empresa.
 
-Gerar resumos;
+```text
+                 FUNCIONÁRIOS
+                      │
+                      ▼
+               ┌────────────┐
+               │  WhatsApp  │
+               └──────┬─────┘
+                      │
+                Texto / Áudio
+                      │
+                      ▼
+               ┌────────────┐
+               │     VPS    │
+               └──────┬─────┘
+                      │
+                      ▼
+               ┌────────────┐
+               │    LLM     │
+               │   AGENTE   │
+               └──────┬─────┘
+                      │
+          ┌───────────┼───────────┐
+          │           │           │
+          ▼           ▼           ▼
+       GitHub      Obsidian     Trello
+          │           │           │
+          └───────────┼───────────┘
+                      │
+                      ▼
+                 Google Drive
+                      │
+                      ▼
+             ┌─────────────────┐
+             │ Análise          │
+             │ Inteligente      │
+             └────────┬────────┘
+                      │
+             ┌────────┴────────┐
+             ▼                 ▼
+        Gestão / Alertas   Dailys / Weeklies
+             │                 │
+             └────────┬────────┘
+                      ▼
+                Equipe / Gestores
+```
 
-Auxiliar na comunicação da equipe;
+---
 
-Automatizar atividades relacionadas às Dailies, Weeklies e Sprints.
+# 11. Resultado Esperado
 
-11. Visão Geral da Solução
-A solução proposta busca transformar diversas ferramentas isoladas em um ecossistema integrado de gestão ágil, no qual a LLM atua como uma camada inteligente entre os funcionários, gestores e as fontes de informação da empresa.
-
-                    FUNCIONÁRIOS
-                         │
-                         ▼
-                    ┌──────────┐
-                    │ WhatsApp │
-                    └────┬─────┘
-                         │
-                    Texto / Áudio
-                         │
-                         ▼
-                    ┌──────────┐
-                    │   VPS    │
-                    └────┬─────┘
-                         │
-                         ▼
-                    ┌──────────┐
-                    │   LLM    │
-                    │  AGENTE   │
-                    └────┬─────┘
-                         │
-          ┌──────────────┼──────────────┐
-          │              │              │
-          ▼              ▼              ▼
-       GitHub         Obsidian        Trello
-          │              │              │
-          └──────────────┼──────────────┘
-                         │
-                         ▼
-                    Google Drive
-                         │
-                         ▼
-                  ┌─────────────┐
-                  │   Análise   │
-                  │ Inteligente │
-                  └──────┬──────┘
-                         │
-              ┌──────────┴──────────┐
-              ▼                     ▼
-         Gestão / Alertas       Daily / Weekly
-              │                     │
-              └──────────┬──────────┘
-                         ▼
-                    Equipe / Gestores
-12. Resultado Esperado
 Com a implementação da solução, espera-se:
 
-Melhorar a comunicação interna;
+* Melhorar a comunicação interna;
+* Reduzir atrasos nos projetos;
+* Identificar impedimentos antecipadamente;
+* Identificar riscos de forma preventiva;
+* Aumentar a visibilidade dos gestores;
+* Reduzir atualizações manuais;
+* Automatizar o acompanhamento de Dailys, Weeklies e Sprints;
+* Centralizar informações de diferentes ferramentas;
+* Facilitar o acesso ao conhecimento dos projetos;
+* Aumentar a eficiência dos processos internos.
 
-Reduzir atrasos nos projetos;
+---
 
-Identificar impedimentos antecipadamente;
+# 12. Ferramentas Utilizadas
 
-Aumentar a visibilidade dos gestores;
-
-Reduzir atualizações manuais;
-
-Automatizar o acompanhamento de Dailies, Weeklies e Sprints;
-
-Centralizar informações de diferentes ferramentas;
-
-Facilitar o acesso ao conhecimento dos projetos;
-
-Aumentar a eficiência dos processos internos.
-
-
-## FERRAMENTAS USADAS
-* **usamos GPT para formatação em md:**
+* **usamos gpt para formatação em md**
