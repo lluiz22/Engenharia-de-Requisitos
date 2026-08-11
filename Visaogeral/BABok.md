@@ -1,5 +1,6 @@
 # Sistema de Gestão Inteligente de Projetos com LLM
-
+Squad
+Luiz claudio, Arthur santos,Thiago brazilellas, Nathan andrade 
 ## 1. Visão Geral
 
 O **Obsidian** funciona como o "cérebro" de conhecimento do sistema, armazenando e organizando informações relevantes dos projetos para que um **LLM (Large Language Model)** possa consultá-las quando necessário.
